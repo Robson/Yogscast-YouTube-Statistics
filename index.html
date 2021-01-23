@@ -5,7 +5,7 @@
   <title>Yogscast YouTube Statistics for 2020</title>
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1">  
-  <script src="https://d3js.org/d3.v3.min.js" charset="utf-8"></script>
+  <script src="https://d3js.org/d3.v3.min.js"></script>
   <script src="data.json"></script>
   <link rel="preconnect" href="https://fonts.gstatic.com">
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Rubik:wght@300;400&display=swap"> 	
@@ -89,7 +89,7 @@
 </div>
 
 <div id="page_series_comparison" style="display: none">
-	<p><input type="checkbox" id="checkSingleVideo" checked="true" /><label for="checkSingleVideo">Include series with a single video.</label></p>
+	<p><input type="checkbox" id="checkSingleVideo" checked="checked" /><label for="checkSingleVideo">Include series with a single video.</label></p>
 	<p class="help"><span>&#x25BC;</span> = Minimum &nbsp; <span>&#x25C6;</span> = Mean &nbsp; <span>&#x25B2;</span> = Maximum</p>
 	<p class="help">Click on the second row to sort any column.</p>
 	<table id="page_series_comparison_table">
@@ -117,13 +117,13 @@
 </div>
 
 <div id="tt" style="display: none">
-	<p><img id="tooltip_thumb" width="120" height="90" alt="Video Thumbnail" /></p>
+	<p><img id="tooltip_thumb" width="120" height="90" alt="Video Thumbnail" src="blank.png" /></p>
 	<p id="tooltip_stats"></p>
 	<p id="tooltip_series"></p>
 	<p id="tooltip_title"></p>
 </div>
 
-<script type="text/javascript">
+<script>
 
 ////////////////// SHARED CODE //////////////////
 
