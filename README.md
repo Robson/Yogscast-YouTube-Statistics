@@ -9,11 +9,15 @@ Will be available near the end of January 2021.
 
 ## Files
 
-*Everything in the GetYouTubeChannelStatistics folder* - This is the C# code that connects to the YouTube API (v3), gets the list of videos and then gets the meta data for those videos. It then writes that out as JSON. If you use this code you will need to create a *key.txt* file, with your own YouTube API key. Put that in the same folder as program.cs, then add it to the Visual Studio project.
+### Everything in the GetYouTubeChannelStatistics folder
+This is the C# code that connects to the YouTube API (v3), gets the list of videos and then gets the meta data for those videos. It then writes that out as JSON.
+If you use this code you will need to create a *key.txt* file, with your own YouTube API key. Put that in the same folder as program.cs, then add it to the Visual Studio project.
 
-*data.json* - All of the video data.
+### data.json
+All of the video data.
 
-*index.html* and *style.css* - The files for the interactive webpage.
+### index.html + style.css
+The files for the interactive webpage.
 
 ## Technologies
 
