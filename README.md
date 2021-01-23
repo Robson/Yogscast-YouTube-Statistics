@@ -10,7 +10,7 @@ Will be available near the end of January 2021.
 ## Files
 
 ### Everything in the GetYouTubeChannelStatistics folder
-This is the C# code that connects to the YouTube API (v3), gets the list of videos and then gets the meta data for those videos. It then writes that out as JSON.
+This is the C# code that connects to the <a href="https://developers.google.com/youtube/v3/getting-started">YouTube API v3</a>, gets the list of videos and then gets the metadata for those videos. It then writes that out to data.json.
 
 If you use this code you will need to create a *key.txt* file, with your own YouTube API key. Put that in the same folder as program.cs, then add it to the Visual Studio project.
 
