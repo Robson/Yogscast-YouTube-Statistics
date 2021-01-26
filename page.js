@@ -2,7 +2,15 @@
 
 function simplify(number, shorten=true, max=null) {
 	number = Math.round(number);
-	return (max == null ? number : max) >= 9500 && shorten ? Math.round(number / 1000) + 'K' : Number(number).toLocaleString();
+	if (shorten) {
+		if ((max == null ? number : max) >= 950000) {
+			return Math.round(number / 1000000) + 'M';	
+		}
+		if ((max == null ? number : max) >= 9500) {
+			return Math.round(number / 1000) + 'K';
+		}
+	}
+	return Number(number).toLocaleString();
 }
 
 function formatPercent(number) {
@@ -10,8 +18,14 @@ function formatPercent(number) {
 }
 
 function formatTime(number) {
+	var hours = '';
+	if (number >= 60 * 60) {
+		hours = Math.floor(number / (60 * 60)) + ':';
+		number %= 60 * 60;
+	}
 	var minutes = Math.floor(number / 60);
-	return minutes + ':' + ((number % 60)+'').padStart(2, '0');
+	var answer = hours + (minutes + '').padStart(2, '0') + ':' + ((number % 60)+'').padStart(2, '0');
+	return answer.startsWith('0') ? answer.substr(1) : answer;
 }
 
 function ordinalIndicator(n) {
@@ -42,7 +56,7 @@ function sortTable(id, n, firstDataRow) {
       y = rows[i + 1].getElementsByTagName("TD")[n];
 	  var first = x.getAttribute('data-value');
 	  var second = y.getAttribute('data-value');
-	  if (n > 0) {
+	  if (n > 0 && !isNaN(first)) {
 		first = +first;
 		second = +second;
 	  }
@@ -605,17 +619,35 @@ function makeSeriesComparisonTableSortable() {
 		});
 }
 
+////////////////// PERFECTLY BALANCED //////////////////
+
+function implementPerfectlyBalancedStatistics() {
+	d3.select('h1').html('Perfectly Balanced<br/>Yogscast YouTube Statistics for 2020');
+	d3.select('#asterism').style('display', 'none');
+	for (var stat in stats) {
+		stats[stat].LengthInSeconds = 60 * 60;
+		stats[stat].CountViews = 100000000;
+		stats[stat].CountLikes = 10000000;
+		stats[stat].CountDislikes = 0;
+		stats[stat].CountComments = 1000000;
+		stats[stat].PercentLikes = 1;
+	}
+	window.scrollTo(0,0);
+	loadEverything();
+}
+
 ////////////////// LOAD PAGES //////////////////
 
-createStatsTable();
+function loadEverything() {
+	createStatsTable();
+	chartSelector.property('value', 'Views');
+	createChart();
+	createSeriesTable();
+	makeTableSortable();
+	document.getElementById('checkSingleVideo').checked = true;
+	createSeriesComparisonTable();
+	makeSeriesComparisonTableSortable();
+	makeCheckBoxUsable();
+}
 
-chartSelector.property('value', 'Views');
-createChart();
-
-createSeriesTable();
-makeTableSortable();
-
-document.getElementById('checkSingleVideo').checked = true;
-createSeriesComparisonTable();
-makeSeriesComparisonTableSortable();
-makeCheckBoxUsable();
+loadEverything();
