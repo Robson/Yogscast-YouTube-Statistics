@@ -304,8 +304,8 @@ chartSelector.on('change', function() {
 
 function createChart() {
 	d3.select('svg *').remove();
-	var margin = {top: 30, right: 30, bottom: 40, left: 50};
-	var width = 980 - margin.left - margin.right,
+	var margin = {top: 30, right: 5, bottom: 40, left: 50};
+	var width = 960 - margin.left - margin.right,
 		height = 500 - margin.top - margin.bottom;
 	var svg = d3.select("svg")
 	  .attr("width", width + margin.left + margin.right)
