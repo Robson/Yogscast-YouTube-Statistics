@@ -5,7 +5,7 @@ An interactive webpage for exploring the YouTube statistics for the <a href="htt
 
 ## Live Version
 
-Will be available near the end of January 2021.
+https://robson.plus/yogscast-youtube-statistics/
 
 ## Files
 
@@ -29,7 +29,5 @@ This is built using:
  * JavaScript
    * <a href="https://github.com/d3/d3">D3.js</a>
 
-<!--
-<a href="https://validator.w3.org/nu/?doc=https%3A%2F%2Frobson.plus%2Ffilm-franchise-ratings%2F"><img src="https://www.w3.org/Icons/valid-html401-blue" alt="Valid HTML" /></a>
-<a href="http://jigsaw.w3.org/css-validator/validator?uri=https%3A%2F%2Frobson.plus%2Ffilm-franchise-ratings%2Fstyle.css&profile=css3svg&usermedium=all&warning=1"><img src="https://jigsaw.w3.org/css-validator/images/vcss-blue" alt="Valid CSS" /></a>   
--->
+<a href="https://validator.w3.org/nu/?doc=https%3A%2F%2Frobson.plus%2Fyogscast-youtube-statistics%2F"><img src="https://www.w3.org/Icons/valid-html401-blue" alt="Valid HTML" /></a>
+<a href="http://jigsaw.w3.org/css-validator/validator?uri=https%3A%2F%2Frobson.plus%2Fyogscast-youtube-statistics%2Fstyle.css&profile=css3svg&usermedium=all&warning=1"><img src="https://jigsaw.w3.org/css-validator/images/vcss-blue" alt="Valid CSS" /></a>   
