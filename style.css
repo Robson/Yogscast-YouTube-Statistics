@@ -187,6 +187,7 @@
 	top: 0;
 	left: 0;
 	position: absolute;
+	border: 5px solid #fff;
 	border-radius: 10px;
 	font: normal 12px arial, helvetica, sans-serif;
   }

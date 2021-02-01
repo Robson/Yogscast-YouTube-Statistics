@@ -131,7 +131,7 @@ function setTooltip(id) {
 		"  &#x1F44E;" + simplify(tooltipData.CountDislikes) +		
 		"<br/>&#x1F4AC;" + simplify(tooltipData.CountComments) + 
 		"  &#x1F551;" + formatTime(tooltipData.LengthInSeconds) + 
-		"  &#x1F4C5;" + tooltipData.PublishedDate.substring(0, 10)
+		"  &#x1F4C5;" + tooltipData.PublishedDate
 		);
 	d3.select('#tooltip_series').text(tooltipData.Series);
 	var titleShort = tooltipData.Title;
@@ -148,7 +148,7 @@ function createTooltipTriggers() {
 		})
 		.on("mousemove", function() {
 			var x = d3.event.pageX - 100;
-			var y = d3.event.pageY - 230;
+			var y = d3.event.pageY - 240;
 			tt.style('left', ~~x + 'px');
 			tt.style('top', ~~y + 'px');
 			if (x <= 0 || y <= 0) {
@@ -450,7 +450,7 @@ function createSeriesTable() {
 	videosSorted.forEach(a => {
 		
 		var row = table.append('tr').attr('class', 'temp');
-		row.append('td').attr('data-value', a.PublishedDate.substring(0, 10)).html(a.PublishedDate.substring(0, 10));
+		row.append('td').attr('data-value', a.PublishedDate).html(a.PublishedDate);
 		row.append('td').attr('data-value', a.Series).attr('class', 'table_series').html(a.Series);
 		row
 			.append('td')
