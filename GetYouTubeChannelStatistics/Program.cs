@@ -5,7 +5,7 @@
 // <https://robson.plus>
 //
 // See the GitHub repository for licensing information.
-// <http://github.com/robson>
+// <https://github.com/Robson/Yogscast-YouTube-Statistics>
 //--------------------------------------------------------------//
 
 namespace GetYouTubeChannelStatistics
@@ -21,7 +21,7 @@ namespace GetYouTubeChannelStatistics
     using Google.Apis.YouTube.v3;
 
     internal class Program
-    {        
+    {
         private const string PlaylistId = "UUH-_hzb2ILSCo9ftVSnrCIQ"; // yogscast "all videos" playlist. this id is public
         private const int YearStart = 2020;
         private const int YearFinal = 2020;
@@ -52,8 +52,7 @@ namespace GetYouTubeChannelStatistics
                 var results = service.Execute();
                 foreach (var video in results.Items)
                 {
-                    // not y10k safe
-                    var year = int.Parse(video.ContentDetails.VideoPublishedAt.Substring(0, 4));
+                    var year = ((DateTime)video.ContentDetails.VideoPublishedAt).Year;
                     if (year < YearStart)
                     {
                         isFinished = true;
@@ -69,7 +68,7 @@ namespace GetYouTubeChannelStatistics
                 {
                     var nextPageToken = results.NextPageToken;
                     service.PageToken = nextPageToken;
-                }                
+                }
             }
             while (!isFinished);
 
@@ -90,7 +89,7 @@ namespace GetYouTubeChannelStatistics
                     var videoData = new VideoData
                     {
                         Id = video.Id,
-                        PublishedDate = video.Snippet.PublishedAt,
+                        PublishedDate = ((DateTime)video.Snippet.PublishedAt).ToString("yyyy-MM-dd"),
                         Title = video.Snippet.Title,
                         Description = video.Snippet.Description,
                         LengthInSeconds = (long)XmlConvert.ToTimeSpan(video.ContentDetails.Duration).TotalSeconds,
@@ -102,147 +101,13 @@ namespace GetYouTubeChannelStatistics
                     };
 
                     videoData.PercentLikes = decimal.Round((decimal)videoData.CountLikes / (decimal)(videoData.CountLikes + videoData.CountDislikes), 5);
-                    videoData.Series = DetermineSeries(videoData);
+                    videoData.Series = SeriesParserYogscast.DetermineSeries(videoData);
                     videoDatas.Add(videoData);
                 }
             }
 
             // just pause, so we don't overload the API with queries and then get blocked
             Thread.Sleep(1000);
-        }
-
-        private static string DetermineSeries(VideoData vd)
-        {
-            var title = vd.Title.ToLower();
-            var tags = vd.Tags.ToLower();
-
-            if (title.Contains("unfortunate spacemen"))
-            {
-                return "Unfortunate Spacemen";
-            }
-
-            if (title.Contains("but it's gmod ttt") ||
-                title.Contains("in gmod ttt"))
-            {
-                return "Gmod TTT";
-            }
-
-            if (title.Contains("among us"))
-            {
-                return "Among Us";
-            }
-
-            if (title.Contains("gmod build"))
-            {
-                return "Gmod Build";
-            }
-
-            if (title.Contains("gmod ttt"))
-            {
-                return "Gmod TTT";
-            }
-
-            if (title.Contains("gmod dupes"))
-            {
-                return "Gmod Dupes";
-            }
-
-            if (title.Contains("voltz in gmod"))
-            {
-                return "Gmod Voltz";
-            }
-
-            if (title.Contains("journey to the savage planet"))
-            {
-                return "Journey to the Savage Planet";
-            }
-
-            if (tags.Contains("ai dungeon") ||
-                tags.Contains("a.i. dungeon"))
-            {
-                return "A.I. Dungeon";
-            }
-
-            if (title.Contains("drink more glurp"))
-            {
-                return "Drink More Glurp";
-            }
-
-            if (title.Contains("gta 5"))
-            {
-                return "GTA 5";
-            }
-
-            if (title.Contains("yogscast game jam"))
-            {
-                return "Yogscast Game Jam";
-            }
-
-            if (title.Contains("ar portions") ||
-                tags.Contains("peculiar portions") ||
-                tags.Contains("internet news"))
-            {
-                return "Simon's Peculiar Portions";
-            }
-
-            if (title.Contains("animal crossing"))
-            {
-                return "Animal Crossing";
-            }
-
-            if (title.Contains("fighting fantasy"))
-            {
-                return "Fighting Fantasy";
-            }
-
-            if (title.Contains("minecraft"))
-            {
-                return "Minecraft";
-            }
-
-            if (title.Contains("jingle") ||
-                title.Contains("million for charity"))
-            {
-                return "Jingle Jam";
-            }
-
-            if (title.Contains("borderlands 3"))
-            {
-                return "Borderlands 3";
-            }
-
-            if (title.Contains("xcom"))
-            {
-                return "XCOM";
-            }
-
-            if (title.Contains("phasmophobia"))
-            {
-                return "Phasmophobia";
-            }
-
-            if (title.Contains("yogscast poker"))
-            {
-                return "Poker";
-            }
-
-            if (title.Contains("struggling"))
-            {
-                return "Struggling";
-            }
-
-            if (title.Contains("yogpod") &&
-                title.Contains("animated"))
-            {
-                return "YoGPoD Animated";
-            }
-
-            if (title.Contains("best christmas song"))
-            {
-                return "Music";
-            }
-
-            throw new Exception("Could not determine the series for this video!");
         }
 
         private static void SetSingleEpisodeSeries()
@@ -258,35 +123,6 @@ namespace GetYouTubeChannelStatistics
         {
             var json = JsonSerializer.Serialize<VideoData[]>(videoDatas.ToArray(), new JsonSerializerOptions { WriteIndented = true });
             File.WriteAllText("data.json", "var stats = " + json);
-        }
-
-        internal class VideoData
-        {
-            public string Id { get; set; }
-
-            public string PublishedDate { get; set; }
-
-            public string Title { get; set; }
-
-            public long LengthInSeconds { get; set; }
-
-            public ulong CountViews { get; set; }
-
-            public ulong CountLikes { get; set; }
-
-            public ulong CountDislikes { get; set; }
-
-            public ulong CountComments { get; set; }
-
-            public decimal PercentLikes { get; set; }
-
-            public string Series { get; set; }
-
-            public bool IsSingleEpisodeSeries { get; set; }
-
-            internal string Description { get; set; }
-
-            internal string Tags { get; set; }
         }
     }
 }
