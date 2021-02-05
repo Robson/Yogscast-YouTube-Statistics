@@ -37,53 +37,42 @@ function ordinalIndicator(n) {
 }
 
 function scale(num, inMin, inMax, outMin, outMax) {
-  return outMin + (num - inMin) * (outMax - outMin) / (inMax - inMin);
+	return outMin + (num - inMin) * (outMax - outMin) / (inMax - inMin);
 }
 
-// modified version of this code:
-// https://www.w3schools.com/howto/tryit.asp?filename=tryhow_js_sort_table_desc
-function sortTable(id, n, firstDataRow) {
-  var table, rows, switching, i, x, y, shouldSwitch, dir, switchcount = 0;
-  table = document.getElementById(id);
-  switching = true;
-  dir = "desc";
-  while (switching) {
-    switching = false;
-    rows = table.rows;
-    for (i = firstDataRow; i < (rows.length - 1); i++) {
-      shouldSwitch = false;
-      x = rows[i].getElementsByTagName("TD")[n];
-      y = rows[i + 1].getElementsByTagName("TD")[n];
-	  var first = x.getAttribute('data-value');
-	  var second = y.getAttribute('data-value');
-	  if (n > 0 && !isNaN(first)) {
-		first = +first;
-		second = +second;
-	  }
-	  
-      if (dir == "asc") {
-        if (first > second) {
-          shouldSwitch = true;
-          break;
-        }
-      } else if (dir == "desc") {
-        if (first < second) {
-          shouldSwitch = true;
-          break;
-        }
-      }
-    }
-    if (shouldSwitch) {
-      rows[i].parentNode.insertBefore(rows[i + 1], rows[i]);
-      switching = true;
-      switchcount ++;      
-    } else {
-      if (switchcount == 0 && dir == "desc") {
-        dir = "asc";
-        switching = true;
-      }
-    }
-  }
+function sortTable(id, n, firstDataRow, headers) {
+	var table = document.getElementById(id);
+	var pairs = [];
+	var direction = table.rows[headers].getElementsByTagName('TH')[n].getAttribute('data-direction');
+	if (!direction) {
+		direction = 'dec';
+	}
+	for (var i = firstDataRow; i < table.rows.length; i++) {
+		var value = table.rows[i].getElementsByTagName('TD')[n].getAttribute('data-value');
+		if (!isNaN(value))
+			value = +value;
+		pairs.push([table.rows[i].id, value]);
+	}
+	var original = pairs.slice(0).map(a => a.slice(0));
+	if (direction == 'dec') {
+		pairs.sort((a, b) => a[1] > b[1] ? -1 : a[1] == b[1] ? 0 : 1);
+	} else {
+		pairs.sort((a, b) => a[1] > b[1] ? 1 : a[1] == b[1] ? 0 : -1);
+	}
+	var isSame = true;
+	for (var i = 0; i < pairs.length; i++) {
+		if (pairs[i][0] != original[i][0]) {
+			isSame = false;
+			break;
+		}
+	}
+	if (isSame) {
+		pairs.reverse();
+	}
+	for (var i = pairs.length - 1; i >= 0; i--) {
+		element = d3.select('#' + id + ' #' + pairs[i][0])[0][0];
+		element.parentNode.insertBefore(element, table.rows[firstDataRow]);
+	}
 }
 
 ////////////////// NAVIGATION //////////////////
@@ -447,15 +436,15 @@ function createSeriesTable() {
 	});
 	
 	var table = d3.select('#page_series_table table');
-	videosSorted.forEach(a => {
+	videosSorted.forEach((a, i) => {
 		
-		var row = table.append('tr').attr('class', 'temp');
+		var row = table.append('tr').attr('class', 'temp').attr('id', 'index' + i);
 		row.append('td').attr('data-value', a.PublishedDate).html(a.PublishedDate);
 		row.append('td').attr('data-value', a.Series).attr('class', 'table_series').html(a.Series);
 		row
 			.append('td')
 			.attr('class', 'standalone')
-			.attr('data-value', a.Id)
+			.attr('data-value', a.Id)			
 			.append('a')
 			.attr('target', '_blank')
 			.attr('href', 'https://youtu.be/' + a.Id)
@@ -470,7 +459,7 @@ function createSeriesTable() {
 			var num = a[s];
 			var numRatio = scale(num, statsStorage[s + 'Lower'], statsStorage[s + 'Upper'], 0, 115);
 			
-			if (s == 'Dislikes') {
+			if (s == 'CountDislikes') {
 				numRatio = 115 - numRatio;
 			}				
 			
@@ -498,7 +487,7 @@ function createSeriesTable() {
 function makeTableSortable() {
 	d3.selectAll('#page_series_table_sorters th')
 		.on('mousedown', function(d, i) {
-			sortTable('page_series_table_table', i, 1);
+			sortTable('page_series_table_table', i, 1, 0);
 		});
 }
 
@@ -545,7 +534,7 @@ function createSeriesComparisonTable() {
 	allSeries.sort();
 	allSeries.unshift('Adverts');
 	allSeries.unshift('All');	
-	allSeries.forEach(a => {
+	allSeries.forEach((a, i) => {
 		var videos = stats.slice(0);
 		if (a == 'Adverts') {
 			videos = videos.filter(a => a.Title.toLowerCase().endsWith('#ad'));
@@ -556,7 +545,7 @@ function createSeriesComparisonTable() {
 			videos = videos.filter(b => !b.IsSingleEpisodeSeries);
 		}		
 		if (videos.length) {
-			var row = table.append('tr').attr('class', 'temp');
+			var row = table.append('tr').attr('class', 'temp').attr('id', 'index' + i);
 			row
 				.append('td')
 				.attr('class', 'series' + (a == 'All' || a == 'Adverts' ? ' highlight' : ''))
@@ -615,7 +604,7 @@ function createSeriesComparisonTable() {
 function makeSeriesComparisonTableSortable() {
 	d3.selectAll('#page_series_comparison_sorters th')
 		.on('mousedown', function(d, i) {
-			sortTable('page_series_comparison_table', i, 4);
+			sortTable('page_series_comparison_table', i, 4, 1);
 		});
 }
 
