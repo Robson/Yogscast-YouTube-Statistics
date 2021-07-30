@@ -1,5 +1,20 @@
 # Yogscast YouTube Statistics
 
+## Table of Contents
+
+ * [Demo](#demo)
+ * [Explanation](#explanation)
+ * [Live Version](#live-version)
+ * [Compatibility](#compatibility)
+ * [Testing](#testing) 
+ * [File Descriptions](#file-descriptions)
+ * [Technologies](#technologies)
+ * [Validation](#validation)
+
+## 🎞️ Demo
+
+(to-do)
+
 ## Explanation
 An interactive webpage for exploring the YouTube statistics for the <a href="https://www.youtube.com/channel/UCH-_hzb2ILSCo9ftVSnrCIQ">Yogscast channel</a>. Includes all videos from 2020.
 
@@ -7,7 +22,24 @@ An interactive webpage for exploring the YouTube statistics for the <a href="htt
 
 https://robson.plus/yogscast-youtube-statistics/
 
-## Files
+## ☑️ Compatibility
+
+The output for this project is designed for desktop only. Mobile is not supported yet.
+
+| Platform | OS      | Browser          | Version | Status  |
+| :------- | :------ | :--------------- | :------ | :------ |
+| Desktop  | Windows | Firefox          | 89      | Working |
+| Desktop  | Windows | Opera            | 77      | Working |
+| Desktop  | Windows | Chrome           | 92      | Working |
+| Desktop  | Windows | Edge             | 91      | Working |
+
+Last tested on 30th July 2021.
+
+## Testing
+
+(to-do)
+
+## File Descriptions
 
 ### Everything in the GetYouTubeChannelStatistics folder
 This is the C# code that connects to the <a href="https://developers.google.com/youtube/v3/getting-started">YouTube API v3</a>, gets the list of videos and then gets the metadata for those videos. It then writes that out to data.json.
@@ -28,6 +60,8 @@ This is built using:
  * CSS
  * JavaScript
    * <a href="https://github.com/d3/d3">D3.js</a>
+
+## Validation
 
 <a href="https://validator.w3.org/nu/?doc=https%3A%2F%2Frobson.plus%2Fyogscast-youtube-statistics%2F"><img src="https://www.w3.org/Icons/valid-html401-blue" alt="Valid HTML" /></a>
 <a href="http://jigsaw.w3.org/css-validator/validator?uri=https%3A%2F%2Frobson.plus%2Fyogscast-youtube-statistics%2Fstyle.css&profile=css3svg&usermedium=all&warning=1"><img src="https://jigsaw.w3.org/css-validator/images/vcss-blue" alt="Valid CSS" /></a>   
