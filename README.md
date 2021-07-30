@@ -37,7 +37,10 @@ Last tested on 30th July 2021.
 
 ## Testing
 
-(to-do)
+To run this on your computer:
+ * [Download the repository](https://github.com/Robson/Yogscast-YouTube-Statistics/archive/master.zip).
+ * Unzip anywhere.
+ * Open index.html in your browser.
 
 ## File Descriptions
 
