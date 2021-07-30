@@ -98,6 +98,7 @@ function toggleButtonsAndPages(selected) {
 	d3.select('.lists').style('display', selected == 'comparison' ? 'none' : null);
 	d3.select('#chartHighlightContainer').style('display', selected == 'chart' ? null : 'none');
 	d3.select('#chartSelectorContainer').style('display', selected == 'chart' ? null : 'none');
+	d3.select('#seriesSelectorContainer').style('display', selected == 'comparison' ? 'none' : null);
 }
 
 buttonSeriesStatistics.on('mousedown', function() { toggleButtonsAndPages('statistics'); });
