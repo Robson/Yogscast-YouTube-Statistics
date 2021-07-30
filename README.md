@@ -11,7 +11,7 @@
  * [Technologies](#technologies)
  * [Validation](#validation)
 
-## 🎞️ Demo
+## Demo
 
 (to-do)
 
@@ -22,7 +22,7 @@ An interactive webpage for exploring the YouTube statistics for the <a href="htt
 
 https://robson.plus/yogscast-youtube-statistics/
 
-## ☑️ Compatibility
+## Compatibility
 
 The output for this project is designed for desktop only. Mobile is not supported yet.
 
