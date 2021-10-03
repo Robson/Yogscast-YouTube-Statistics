@@ -13,7 +13,7 @@
 
 ## Demo
 
-![Demo](https://raw.githubusercontent.com/Robson/Yogscast-YouTube-Statistics/demonstration/Demo.gif)
+![Demo](https://raw.githubusercontent.com/Robson/Yogscast-YouTube-Statistics/Demo.gif)
 
 ## Explanation
 An interactive webpage for exploring the YouTube statistics for the <a href="https://www.youtube.com/channel/UCH-_hzb2ILSCo9ftVSnrCIQ">Yogscast channel</a>. Includes all videos from 2020.
