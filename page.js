@@ -108,7 +108,6 @@ buttonSeriesComparison.on('mousedown', function() { toggleButtonsAndPages('compa
 
 ////////////////// TOOLTIP //////////////////
 
-var tooltip = d3.select('#tt');
 var tt = d3.select('#tt');
 
 function setTooltip(id) {
@@ -235,7 +234,7 @@ function createRowsForStat(identifier, readable, formatStyle='', showHeaders=fal
 	if (showHeaders) {
 		createTableHeaders(Math.min(videosSorted.length, 5));	
 	}
-	var rowSpace = table.append('tr').attr('class', 'spacer').append('td');
+	table.append('tr').attr('class', 'spacer').append('td');
 	var rowMost = table.append('tr');	
 	rowMost.append('th').attr('rowspan', 2).html(readable).attr('class', 'category');
 	rowMost.append('th').html('Most');
@@ -380,7 +379,7 @@ function createChart() {
 	  .data(dataset)
 	  .enter().append("g")
 	  .attr("class", "cost")
-	  .style("fill", function(d, i) { return d % 2 == 0 ? '#080' : '#800'; });	  
+	  .style("fill", function(d) { return d % 2 == 0 ? '#080' : '#800'; });	  
 	svg.append("text")             
       .attr("transform",
             "translate(" + (width/2) + " ," + 
@@ -394,7 +393,7 @@ function createChart() {
       .attr("dy", "1em")
       .style("text-anchor", "middle")
       .text(chartSelected);  	  
-	var rect = groups.selectAll("rect")
+	groups.selectAll("rect")
 	  .data(function(d) { return d; })
 	  .enter()
 	  .append("rect")
@@ -557,11 +556,7 @@ function createSeriesComparisonTable() {
 				.attr('data-value', videos.length)
 				.html(videos.length);
 			['CountViews', 'PercentLikes', 'CountComments'].forEach(s => {
-			
-				var minAll = Math.min(...stats.map(b => b[s]));
-				var avgAll = stats.reduce((b, c) => b + c[s], 0) / stats.length;
-				var maxAll = Math.max(...stats.map(b => b[s]));
-			
+					
 				var min = Math.min(...videos.map(b => b[s]));
 				var avg = videos.reduce((b, c) => b + c[s], 0) / videos.length;
 				var max = Math.max(...videos.map(b => b[s]));
@@ -639,5 +634,13 @@ function loadEverything() {
 	makeSeriesComparisonTableSortable();
 	makeCheckBoxUsable();
 }
+
+////////////////// GENERIC //////////////////
+
+function isUsed(a) {
+	return a;
+}
+
+isUsed([implementPerfectlyBalancedStatistics]);
 
 loadEverything();
