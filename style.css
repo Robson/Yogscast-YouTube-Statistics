@@ -8,7 +8,8 @@
   
   body,
   select,
-  option {
+  option,
+  input {
 	font-family: rubik, arial, helvetica, sans-serif;
   }
   
@@ -210,26 +211,29 @@
 /********** BUTTONS **********/
   
   #buttons {
-	margin: 25px 0 30px;
+	margin: 15px 0 20px;
   }
   
-  #buttons span {
+  input[type="button"] {
+	font-size: 16px;
 	background: #E5007E;
 	color: #fff;
 	padding: 5px 8px;
 	cursor: pointer;
+	border: 0;
 	border-bottom: 3px solid #F17EBD;
 	border-radius: 5px;
 	opacity: 0.666;
+	margin: 6px 0 6px;
   }
-  
-  #buttons span:hover {
+
+  input[type="button"]:hover {
 	opacity: 1;
   }
   
-  #buttons span.on {
+  input[type="button"].on {
 	background: #000;
-	border-bottom: 3px solid #aaa;
 	opacity: 1;
 	cursor: default;
+	border-bottom: 3px solid #666;
   }
