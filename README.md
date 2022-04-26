@@ -18,6 +18,8 @@
 ## Explanation
 An interactive webpage for exploring the YouTube statistics for the <a href="https://www.youtube.com/channel/UCH-_hzb2ILSCo9ftVSnrCIQ">Yogscast channel</a>. Includes all videos from 2020.
 
+YouTube removed the dislike statistic, which was a fundamental part of this project, so consequently this is no longer updated.
+
 ## Live Version
 
 https://robson.plus/yogscast-youtube-statistics/
