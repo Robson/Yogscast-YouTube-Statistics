@@ -8,22 +8,22 @@
 	  function gtag(){dataLayer.push(arguments);}
 	  gtag('js', new Date());
 	  gtag('config', 'G-2E561F2422');
-	</script>	
+	</script>
 	<!--
 	************************************************
 	The script above is for google analytics.
 	You'll want to remove that if you use this page.
 	************************************************
 	-->
-  <meta charset="UTF-8" />
+  <meta charset="UTF-8">
   <title>Yogscast YouTube Statistics for 2020</title>
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1">  
+  <meta name="viewport" content="width=device-width, initial-scale=1">
   <script src="https://d3js.org/d3.v3.min.js"></script>
   <script src="data.json"></script>
   <link rel="preconnect" href="https://fonts.gstatic.com">
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Rubik:wght@300;400&display=swap">
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto+Slab:wght@400;500&display=swap"> 	
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto+Slab:wght@400;500&display=swap">
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
@@ -31,13 +31,13 @@
 <h1>Yogscast YouTube Statistics for 2020</h1>
 
 <div id="buttons">
-	<input type="button" class="on" id="button_series_statistics" value="Most + Least" />
+	<input type="button" class="on" id="button_series_statistics" value="Most + Least">
 	&nbsp;
-	<input type="button" id="button_series_chart" value="Chart" />
+	<input type="button" id="button_series_chart" value="Chart">
 	&nbsp;
-	<input type="button" id="button_series_table" value="Table" />
+	<input type="button" id="button_series_table" value="Table">
 	&nbsp;
-	<input type="button" id="button_series_comparison" value="Series Comparison" />
+	<input type="button" id="button_series_comparison" value="Series Comparison">
 </div>
 
 <div id="lists">
@@ -60,7 +60,7 @@
 			<option value="Comments">Comments</option>
 			<option value="Length in Minutes">Length</option>
 		</select>
-	</p>	
+	</p>
 </div>
 
 <div id="page_series_statistics">
@@ -78,7 +78,7 @@
 	</table>
 </div>
 
-<div id="page_series_chart" style="display: none">	
+<div id="page_series_chart" style="display: none">
 	<p class="help">Hover over a bar to view the video details.</p>
 	<svg></svg>
 </div>
@@ -90,11 +90,11 @@
 			<th data-direction="asc">Date</th>
 			<th data-direction="asc" class="table_series">Series</th>
 			<th data-direction="asc">Thumbnail</th>
-			<th data-direction="asc">Title</th>			
+			<th data-direction="asc">Title</th>
 			<th>Views</th>
 			<th>Likes %</th>
 			<th>Likes</th>
-			<th>Dislikes</th>						
+			<th>Dislikes</th>
 			<th>Comments</th>
 			<th>Length</th>
 		</tr>
@@ -102,7 +102,7 @@
 </div>
 
 <div id="page_series_comparison" style="display: none">
-	<p><input type="checkbox" id="checkSingleVideo" checked="checked" /><label for="checkSingleVideo">Include series with a single video.</label></p>
+	<p><input type="checkbox" id="checkSingleVideo" checked="checked"><label for="checkSingleVideo">Include series with a single video.</label></p>
 	<p class="help"><span>&#x25BC;</span> = Minimum &nbsp; <span>&#x25C6;</span> = Mean &nbsp; <span>&#x25B2;</span> = Maximum</p>
 	<p class="help">Click on the second row to sort any column.</p>
 	<table id="page_series_comparison_table">
@@ -124,13 +124,13 @@
 			<th>&#x25B2;</th>
 			<th>&#x25BC;</th>
 			<th>&#x25C6;</th>
-			<th>&#x25B2;</th>			
+			<th>&#x25B2;</th>
 		</tr>
 	</table>
 </div>
 
 <div id="tt" style="display: none">
-	<p><img id="tooltip_thumb" width="120" height="90" alt="Video Thumbnail" src="blank.png" /></p>
+	<p><img id="tooltip_thumb" width="120" height="90" alt="Video Thumbnail" src="blank.png"></p>
 	<p id="tooltip_stats"></p>
 	<p id="tooltip_series"></p>
 	<p id="tooltip_title"></p>
@@ -139,7 +139,7 @@
 <script src="page.js"></script>
 
 <p class="about">
-	<span id="asterism" onclick="implementPerfectlyBalancedStatistics()">&#8258;</span><br/><br/>Statistics were last updated on 1st February 2021.
+	<span id="asterism" onclick="implementPerfectlyBalancedStatistics()">&#8258;</span><br><br>Statistics were last updated on 1st February 2021.
 	<a href="https://github.com/Robson/Yogscast-YouTube-Statistics">View the code</a> on GitHub.
 	Created by <a href="https://robson.plus">Robson</a>.
 </p>
